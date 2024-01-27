@@ -1,11 +1,12 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
+from .database_extensions import db
 from datetime import datetime
 from flask_restx import Api, Resource, Namespace
+# from models.user import User
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///firstdatabase.db'
-db = SQLAlchemy(app)
+db.init_app(app)
 api = Api(app)
 
 USER_NS = Namespace("User", description="REST services for User")
@@ -17,6 +18,7 @@ class User(db.Model):
     username = db.Column(db.String(80), nullable=False)
     email = db.Column(db.String(120), nullable=False)
     created = db.Column(db.DateTime, default=datetime.utcnow())
+
     def __repr__(self):
         return '<User %r>' % self.username
 
