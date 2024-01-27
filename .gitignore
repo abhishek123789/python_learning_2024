@@ -1,0 +1,32 @@
+# Virtual environment
+.venv/
+env/
+
+# Compiled Python files
+*.pyc
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+
+# Dependency management
+*.lock
+pip-selfcheck.json
+
+# Configuration files
+.env
+
+# Logs and temporary files
+*.log
+*.tmp
+
+# Generated files
+__pycache__/
+instance/
+
+# Operating system and miscellaneous
+.DS_Store
+Thumbs.db
+*.pyo
+*.pyc
