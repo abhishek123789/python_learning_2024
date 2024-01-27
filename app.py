@@ -1,10 +1,16 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+from flask_restx import Api, Resource, Namespace
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///firstdatabase.db'
 db = SQLAlchemy(app)
+api = Api(app)
+
+USER_NS = Namespace("User", description="REST services for User")
+
+api.add_namespace(USER_NS)
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -15,16 +21,21 @@ class User(db.Model):
         return '<User %r>' % self.username
 
 
-@app.route('/')
-def hello_world():
-    user = User(username="Abhishek", email="abhishek123789@gmail.com")
-    db.session.add(user)
-    db.session.commit()
-    return 'Hello, World!'
+
+@USER_NS.route('/')
+class hello_world(Resource):
+    def post(self):
+        user = User(username="Abhishek", email="abhishek123789@gmail.com")
+        db.session.add(user)
+        db.session.commit()
+        return 'Hello, World!'
 
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
-    app.run(debug=True)
+
+    Api.init_app(app)
+
+    app.run()
 
     

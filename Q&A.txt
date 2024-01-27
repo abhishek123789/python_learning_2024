@@ -1,0 +1,52 @@
+Q.why do we use flask_restx?
+
+1.Simplified API Development:
+With Flask-RESTx, defining routes and handling requests becomes more concise. Here's an example:
+
+from flask import Flask
+from flask_restx import Api, Resource
+
+app = Flask(__name__)
+api = Api(app)
+
+@api.route('/hello')
+class HelloWorld(Resource):
+    def get(self):
+        return {'message': 'Hello, World!'}
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+2.Automatic Swagger Documentation:
+
+Flask-RESTx automatically generates Swagger documentation for your API.
+You don't need to write additional documentation. 
+
+3.
+Request Parsing and Validation:
+
+Flask-RESTx provides request parsing and validation features.
+You can define expected parameters and request bodies. Here's an example:
+from flask_restx import reqparse
+
+parser = reqparse.RequestParser()
+parser.add_argument('name', type=str, required=True, help='Name cannot be blank')
+
+4.Response Marshalling:
+
+Flask-RESTx simplifies response formatting with response marshalling.
+You can define response models for your endpoints. Here's an example:
+from flask_restx import fields
+
+user_model = api.model('User', {
+    'id': fields.Integer,
+    'name': fields.String
+})
+
+5.Error Handling:
+
+Flask-RESTx provides built-in error handling mechanisms.
+You can define custom error responses and handle exceptions. Here's an example:
+@api.errorhandler(Exception)
+def handle_error(error):
+    return {'message': 'An error occurred'}, 500
