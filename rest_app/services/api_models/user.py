@@ -6,3 +6,8 @@ user_model = api.model('User', {
     "username": fields.String(description="Username of the user"),
     "email": fields.String(description="Email address of the user")
 })
+
+USER_MODEL_PAYLOAD = api.model('UserModelPayload', {
+    "username": fields.String(description="Username of the user"),
+    "email": fields.String(description="Email address of the user")
+})
