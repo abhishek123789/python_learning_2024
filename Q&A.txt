@@ -50,3 +50,46 @@ You can define custom error responses and handle exceptions. Here's an example:
 @api.errorhandler(Exception)
 def handle_error(error):
     return {'message': 'An error occurred'}, 500
+
+Q.what is the attr package do in python?
+In Python, the attr package is a library that provides a concise way to create classes
+with attributes. It aims to reduce the boilerplate code typically associated with defining
+classes and their attributes.
+
+Here's an overview of what the attr package does and its main features:
+
+Attribute-based Classes: With the attr package, you can define classes using a declarative style,
+specifying attributes directly as class variables.
+
+Automatic Generation of Special Methods: When using attr, the __init__, __repr__, __eq__, 
+and other special methods are automatically generated based on the attributes defined in the class.
+
+Immutable and Mutable Classes: attr supports both immutable and mutable classes. 
+Immutable classes are created using attr.s, while mutable classes are created using attr.ib.
+
+Validation and Default Values: attr allows you to specify default values and validation rules
+for attributes, ensuring that the objects instantiated from the class have the desired properties.
+
+Concise Syntax: The syntax provided by the attr package is concise and easy to read,
+making it simple to define classes and attributes without writing repetitive code.
+
+@attr.s
+class Person:
+    name: str = attr.ib()
+    age: int = attr.ib(default=0)
+
+    def greet(self):
+        return f"Hello, my name is {self.name} and I'm {self.age} years old."
+
+# Creating an instance of the Person class
+person = Person(name="John", age=30)
+
+# Accessing attributes and calling methods
+print(person.name)  # Output: John
+print(person.age)   # Output: 30
+print(person.greet())
+
+In this example, attr.s is used as a decorator to define a class (Person) with attributes
+(name and age). The attr.ib function is used to specify attributes with default values
+and other properties.
+

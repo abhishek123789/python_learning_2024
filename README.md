@@ -28,3 +28,11 @@ class hello_world(Resource):
     def post(self):
         print(USER_NS.payload)
         return {}
+
+<!-- To create tables from modals Steps -->
+flask shell 
+then 
+from rest_app import *
+db.create_all()
+exit()
+
