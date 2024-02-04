@@ -18,7 +18,7 @@ USER_NS = Namespace("User", description="REST services for User")
 @USER_NS.route('/')
 class User(Resource):
     @USER_NS.expect(USER_MODEL_PAYLOAD)
-    # @USER_NS.marshal_with(user_model)
+    @USER_NS.marshal_with(user_model)
     # @allowed_role_to_use_api
     def post(self):
         # username=USER_NS.payload["email"]
@@ -32,7 +32,7 @@ class User(Resource):
         # Access request body
         # print(request.json)
         try:
-            error = UserData(
+            error, model = UserData(
                 username=USER_NS.payload["username"],
                 email=USER_NS.payload["email"]
             ).save()
@@ -46,4 +46,4 @@ class User(Resource):
             # Show what the error message is
             print(f"Error occurred while saving object: {e}")
 
-        return "User Created", HTTPStatus.CREATED
+        return model, HTTPStatus.CREATED

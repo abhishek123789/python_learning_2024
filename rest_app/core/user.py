@@ -10,7 +10,7 @@ class UserData(IdMixin):
     def save(self):
         # Logic to save UserData instance to the database or perform other actions
         print(f"Saving user data for {self.username} with email {self.email}")
-        self.set_id(self.to_model())
+        return self.set_id(self.to_model())
 
 
     def to_model(self) -> User:
